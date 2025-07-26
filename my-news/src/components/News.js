@@ -26,9 +26,10 @@ export default class News extends Component {
       page:1,
     }
   }  
+  
   async componentDidMount(){
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1c1374a2f0824b65ac36cb945d3c3404&page=1&pageSize=${this.props.pageSize}`;
-    // let url="https://newsapi.org/v2/everything?domains=wsj.com&apiKey=1c1374a2f0824b65ac36cb945d3c3404";
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=1&pageSize=${this.props.pageSize}`;
+    // let url=`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
     this.setState({loading:true})
     let data= await fetch(url);
     let parsedData= await data.json();
@@ -39,7 +40,7 @@ export default class News extends Component {
     console.log(parsedData);
   }
   handlePrevBtn= async()=>{
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1c1374a2f0824b65ac36cb945d3c3404&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
     this.setState({loading:true})
     let data= await fetch(url);
     let parsedData= await data.json();
@@ -52,7 +53,7 @@ export default class News extends Component {
   }
   handleNextBtn=async ()=>{
     if(!(this.state.page+1 >Math.ceil(this.state.totalresults/this.props.pageSize))){
-      let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1c1374a2f0824b65ac36cb945d3c3404&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+      let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
       this.setState({loading:true})
       let data= await fetch(url);
       let parsedData= await data.json();
